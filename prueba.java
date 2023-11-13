@@ -10,6 +10,14 @@ import javax.swing.JCheckBox; //Clase para crear Casillas de Verificacion
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup; //Clase para agrupar botones
 import javax.swing.JComboBox; //Clase para crear listas desplegables
+import javax.swing.JList; //Clase para crear Listas
+import javax.swing.JScrollPane; //Clase para crear un contenedor con Scroll (Deslizable)
+import javax.swing.JDialog; //Clase para crear pantallas emergentes
+import javax.swing.JFileChooser; //Clase para seleccionar archivos del directorio
+import javax.swing.ImageIcon; //Clase para mostar imagenes
+
+
+
 public class prueba {
     public static void main(String[] args){
         JFrame ventana=new JFrame("Introduccion Interfaz Grafica");
@@ -65,7 +73,40 @@ public class prueba {
         JComboBox<String> listaColores=new JComboBox<>(colores);
         contendor1.add(listaColores);
 
+        //Listas para seleccionar
+        String[] animales={"Perro","Gato","Caballo","Conejo","Leon","Perro","Gato","Caballo","Conejo","Leon","Perro","Gato","Caballo","Conejo","Leon"};
+        JList<String> listaAnimales=new JList<>(animales);
+        //Scroll
+        JScrollPane contendorScroll=new JScrollPane(listaAnimales);
 
+        contendor1.add(contendorScroll);
+        //Pantalla emergentes (DIALOGO - NOTIFICACION)
+        JButton botonNotificacion=new JButton("Ver Notificacion");
+        contendor1.add(botonNotificacion);
+
+        botonNotificacion.addActionListener(e -> {
+                    JDialog notificacion = new JDialog(ventana, "Bienvenido", true);
+                    notificacion.setSize(200, 120);
+                    notificacion.setVisible(true);
+        });
+        //Selector de Archivos
+        JButton seleccionar=new JButton("Seleccionar");
+        contendor1.add(seleccionar);
+
+        seleccionar.addActionListener(e -> {
+            JFileChooser Selector=new JFileChooser();
+            int resultadoSeleccion=Selector.showOpenDialog(ventana);
+            if (resultadoSeleccion==JFileChooser.APPROVE_OPTION){
+                System.out.println("El archivo seleccionado es "+Selector.getSelectedFile().getPath());
+            }
+        });
+        //Imagenes
+        //Cargar la imagen
+        ImageIcon imagen1=new ImageIcon("C:/Users/STARTEM/Pictures/18.png");
+        JLabel imagen=new JLabel(imagen1);
+
+
+        contendor1.add(imagen);
 
 
 
